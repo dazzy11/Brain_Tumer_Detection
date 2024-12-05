@@ -1,0 +1,154 @@
+<!DOCTYPE html> 
+
+<html lang=”en”> 
+
+<head> 
+
+  <meta charset=”UTF-8”> 
+
+  <meta name=”viewport” content=”width=device-width, initial-scale=1.0”> 
+
+  <title>Patient Management System</title> 
+
+  <style>     body { 
+
+      Font-family: Arial, sans-serif;       margin: 0;       padding: 0;       display: flex;       justify-content: center;       align-items: center;       height: 100vh;       background-color: #f0f8ff; 
+
+    } 
+
+    .container {       width: 400px;       padding: 20px;       background: white; 
+
+      Box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);       border-radius: 8px; 
+
+    } 
+
+    .hidden {       display: none; 
+
+  }  label {   display: block;   margin-bottom: 8px; 
+
+Font-weight: bold; 
+
+}
+
+Input, button { 
+
+   Width: 100%;    padding: 10px; 
+
+    Margin-bottom: 16px; 
+
+      Border: 1px solid #ddd; 
+
+      Border-radius: 4px; 
+
+    }     button { 
+
+      Background-color: #007bff; 
+
+      Color: white;       border: none;       cursor: pointer; 
+
+    } 
+
+    Button:hover {       background-color: #0056b3; 
+
+    }     img { 
+
+      Max-width: 100%;       border: 1px solid #ddd;       border-radius: 8px; 
+
+      Margin-top: 16px; 
+
+    } 
+
+  </style> 
+
+</head> 
+
+<body> 
+
+  <div id=”uploadPage” class=”container”> 
+
+    <h2>Upload MRI Scan</h2> 
+
+    <label for=”mriScan”>Select MRI Scan</label> 
+
+    <input type=”file” id=”mriScan”> 
+
+    <button onclick=”uploadImage()”>Upload</button> 
+
+  </div> 
+
+ 
+
+  <div id=”resultPage” class=”container hidden”> 
+
+    <h2>Prediction Result</h2> 
+
+    <p id=”resultText”></p> 
+
+    <img id=”uploadedImage” alt=”Uploaded MRI Scan” style=”max-width: 100%; border: 1px solid #ddd; border-radius: 8px; margin-top: 16px;”> 
+
+ <button onclick=”resetPage()”>Upload Another Scan</button> 
+
+<h1><b>SUGGESTION</b></h1> 
+
+<P><b>Dr.HariHran.MD</b>(trichy)</P><br> 
+
+<P><b>Dr.Dhevan.MD</b>(chennai)</P><br> 
+
+ 
+
+</div> 
+
+ 
+
+  <script> 
+
+    Function uploadImage() { 
+
+    Const mriScan = document.getElementById(“mriScan”).files[0];     if (mriScan) {         const formData = new FormData(); 
+
+        formData.append(“file”, mriScan); 
+
+ 
+
+        fetch(“/upload”, {             method: “POST”, 
+
+            body: formData, 
+
+        }) 
+
+            .then((response) => response.json()) 
+
+            .then((data) => {                 if (data.result) { 
+
+                    // Hide upload page, show result page                     document.getElementById(“uploadPage”).classList.add(“hidden”);                     document.getElementById(“resultText”).innerText = data.result;                     document.getElementById(“uploadedImage”).src = data.image_url; // Set uploaded image                     document.getElementById(“resultPage”).classList.remove(“hidden”); 
+
+                } else {                     alert(“Error: “ + data.error); 
+
+                } 
+
+            }) 
+
+            .catch((error) => {                 console.error(“Error:”, error); 
+
+                Alert(“Something went wrong!”); 
+
+            });     } else {         alert(“Please upload an MRI scan!”); 
+
+    } 
+
+} 
+
+ 
+
+Function resetPage() { 
+
+   Document.getElementById(“resultPage”).classList.add(“hidden”);   document.getElementById(“uploadPage”).classList.remove(“hidden”);   document.getElementById(“mriScan”).value = “”; // Clear the file input 
+
+}
+
+</script> 
+
+   
+
+</body> </html>
+

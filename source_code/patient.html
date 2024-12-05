@@ -1,0 +1,83 @@
+<!DOCTYPE html> 
+
+<html lang=”en”> 
+
+<head> 
+
+  <meta charset=”UTF-8”> 
+
+<meta name=”viewport” content=”width=device-width, initial-scale=1.0”> 
+
+<title>Patient Details</title> 
+
+<style> body { 
+
+Font-family: Arial, sans-serif; 
+
+Background-color: #f0f8ff; 
+
+  Display: flex;   justify-content: center;    align-items: center; 
+
+    Height: 100vh; 
+
+      Margin: 0; 
+
+    } 
+
+    .container {       width: 400px;       padding: 20px;       background: white; 
+
+      Box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);       border-radius: 8px; 
+
+    } 
+
+    Input, button, select, textarea {       width: 100%;       padding: 10px;       margin: 10px 0;       border: 1px solid #ddd; 
+
+      Border-radius: 4px; 
+
+    }     button { 
+
+      Background-color: #007bff; 
+
+      Color: white;       cursor: pointer; 
+
+    } 
+
+    Button:hover { 
+
+      Background-color: #0056b3; 
+
+    } 
+
+  </style> 
+
+</head> 
+
+<body> 
+
+  <div class=”container”> 
+
+    <h2>Patient Details</h2> 
+
+    <form action=”/patient_details” method=”POST”> 
+
+      <input type=”text” name=”name” placeholder=”Full Name” required> 
+
+      <input type=”number” name=”age” placeholder=”Age” required> 
+
+    <select name=”gender” required> 
+
+     <option value=””>Select Gender</option>     <option value=”male”>Male</option> 
+
+    <option value=”female”>Female</option> 
+
+  <option value=”other”>Other</option> 
+
+</select> 
+
+  <textarea name=”history” placeholder=”Medical History” rows=”4”></textarea> 
+
+  <button type=”submit”>Submit Details</button>  </form> 
+
+</div> 
+
+</body> </html> 
